@@ -18,7 +18,9 @@ _{In this database, you're going to be able to store stylists and clients. With 
 * _CREATE TABLE clients (id serial PRIMARY KEY, name varchar, stylist_id int)_
 * _CREATE DATABASE hair_salon WITH TEMPLATE hair_salon_test_
 * _run 'ruby app.rb'_
-* _enjoy :)_
+* _enjoy _
+
+* _also, why do we use localhost:4567 _
 
 ## Technologies Used
 
