@@ -16,14 +16,6 @@ describe(Stylist) do
     end
   end
 
-  describe('.fetch_id') do
-    it('will fetch the id of a stylist given a name') do
-      fetched_stylist = Stylist.new({:name => "Regali", :id => nil})
-      fetched_stylist.save
-      expect(Stylist.fetch_id("Regali")).to(eq(fetched_stylist.id))
-    end
-  end
-
   describe("#name") do
     it('will return the stylist name') do
       expect(test_stylist.name).to(eq("Regali"))

@@ -1,74 +1,99 @@
 <h2>Update database</h2>
+
 <h3>Clients:</h3>
+
 <div class="client">
-  <br>
   <strong>New Client:</strong>
   <% if @stylists.any? %>
   <form class="form client" action="/admin/new-client/" method="post">
     <label for="name">name</label>
-    <input type="text" name="name">
+    <input type="text" name="new_client_name">
     <div class="dropdown">
       <select class="stylists" name="stylist_id">
-      <% @stylists.each do |stylist| %>
-          <option value="<%= stylist.id %>"><%=stylist.name%></option>
-      <% end %>
+        <% @stylists.each do |stylist| %>
+            <option value="<%= stylist.id %>"><%=stylist.name%></option>
+        <% end %>
       </select>
     </div>
     <button type="submit">submit</button>
   </form>
+
   <% else %>
     <h4><em>No Stylists, enter a stylist before you can enter a client!</em></h4>
   <% end %>
+
   <br>
+
   <strong>Update Client</strong>
+
   <br>
+
   <% @clients.each do |client| %>
-  <br><%=client.name %>
-  <form class="form client" action="/admin/update-client/<%=client.id%>/" method="post">
-    <input type="hidden" name="_method" value="patch">
-    <label for="name">name</label>
-    <input type="text" name="name" placeholder="<%=client.name %>">
-    <div class="dropdown">
-      <select class="stylists" name="stylist_id">
-      <% @stylists.each do |stylist| %>
-          <option value="<%= stylist.id %>"><%=stylist.name%></option>
-      <% end %>
-      </select>
-    </div>
-    <button type="submit">update</button>
-  </form>
+
+  <br>
+
+    <%=client.name %>
+    <form class="form client" action="/admin/update-client/<%=client.id%>/" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <label for="name">name</label>
+      <input type="text" name="updated_client_name" placeholder="<%=client.name %>">
+      <div class="dropdown">
+        <select class="stylists" name="updated_stylist_id">
+          <% @stylists.each do |stylist| %>
+              <option value="<%= stylist.id %>"><%=stylist.name%></option>
+          <% end %>
+        </select>
+      <button type="submit">update <%=client.name%></button>
+      </div>
+    </form>
   <% end %>
 </div>
-<br>
 
 <h3>Stylists:</h3>
+
 <form class="form stylist" action="/admin/new-stylist/" method="post">
   <label for="name">name</label>
-  <input type="text" name="name">
+  <input type="text" name="new_stylist_name">
   <button type="submit">add stylist</button>
 </form>
+
 <br>
+
 <strong>Update Stylist</strong>
+
 <br>
 <br>
+
 <% @stylists.each do |stylist| %>
-<strong><%=stylist.name %></strong>
-<form class="form client" action="/admin/update-stylist/<%=stylist.id%>/" method="post">
-  <input type="hidden" name="_method" value="patch">
-  <label for="name">name</label>
-  <input type="text" name="name" placeholder="<%=stylist.name %>">
-  <button type="submit">update</button> <br>
-</form>
+  <strong><%=stylist.name %></strong>
+  <form class="form client" action="/admin/update-stylist/<%=stylist.id%>/" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="name">name</label>
+    <input type="text" name="updated_stylist_name" placeholder="<%=stylist.name %>">
+    <button type="submit">update stylist</button> <br>
+  </form>
   <% end %>
+
 <hr>
+
   <% if @stylists.any? %>
-  Stylists: <br>
-    <% @stylists.each do |stylist| %>
-    <%= stylist.name %><form class="btn delete" action="/admin/delete-stylist/<%=stylist.id%>/" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <button type="submit" name="button">delete</button>
-    </form><br>
-    <% end %>
+    Stylists:
+    <br>
+      <% @stylists.each do |stylist| %>
+        <%= stylist.name %>
+        <% if stylist.clients.any? %>
+        - Clients:
+          <% stylist.clients.each do |client| %>
+            <%= client.name %> |
+          <% end %>
+        <% else %>
+          - They don't have any clients, fire them or add some!
+        <% end %>
+        <form class="btn delete" action="/admin/delete-stylist/<%=stylist.id%>/" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit" name="button">delete stylist</button>
+        </form><br>
+      <% end %>
   <% end %>
 
   <% if @clients.any? %>
@@ -77,7 +102,7 @@
     <%= client.name %>
     <form class="btn delete" action="/admin/delete-client/<%=client.id%>/" method="post">
       <input type="hidden" name="_method" value="delete">
-      <button type="submit" name="button">delete</button>
+      <button type="submit" name="button">delete client</button>
     </form><br>
     <% end %>
   <% end %>

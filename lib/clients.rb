@@ -30,10 +30,10 @@ class Client
   end
 
   define_singleton_method(:find) do |identifier|
-    found_client = nil
+    found_client      = nil
     Client.all().each() do |client|
       if client.id == identifier
-        found_client = client
+        found_client  = client
       end
     end
     found_client
@@ -44,9 +44,9 @@ class Client
   end
 
   define_method(:update) do |attributes|
-    @name = attributes.fetch(:name)
-    @id = self.id()
+    @name             = attributes.fetch(:name)
+    @stylist_id       = attributes.fetch(:stylist_id)
+    @id               = self.id()
     DB.exec("UPDATE clients SET name = '#{@name}', stylist_id = #{stylist_id} WHERE id = #{@id};")
   end
-
 end
