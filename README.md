@@ -1,8 +1,8 @@
-# _{Hair Salon}_
+# _Hair Salon_
 
 ##### _{Database for a hair salon with stylists and clients}, {August 21, 2015}_
 
-#### By _**{Christian Lei}**_
+#### By _**Christian Lei**_
 
 ## Description
 
@@ -22,13 +22,11 @@ _{In this database, you're going to be able to store stylists and clients. With 
 
 ## Technologies Used
 
-_{Ruby, Sinatra, Capybara, hTML, PSQL, postgres}_
+_Ruby, Sinatra, Capybara, hTML, PSQL, postgres_
 
 ### Legal
 
-*{This is boilerplate legal language. Read through it, and if you like it, use it. There are other license agreements online, but you can generally copy and paste this.}*
-
-Copyright (c) 2015 **_{Christian Lei}_**
+Copyright (c) 2015 **_Christian Lei_**
 
 This software is licensed under the MIT license.
 
