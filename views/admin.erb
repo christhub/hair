@@ -1,7 +1,8 @@
 <h2>Update database</h2>
 <h3>Clients:</h3>
 <div class="client">
-  New Client:
+  <br>
+  <strong>New Client:</strong>
   <% if @stylists.any? %>
   <form class="form client" action="/admin/new-client/" method="post">
     <label for="name">name</label>
@@ -18,10 +19,15 @@
   <% else %>
     <h4><em>No Stylists, enter a stylist before you can enter a client!</em></h4>
   <% end %>
-  Update Client
-  <form class="form client" action="/admin/update-client/" method="post">
+  <br>
+  <strong>Update Client</strong>
+  <br>
+  <% @clients.each do |client| %>
+  <br><%=client.name %>
+  <form class="form client" action="/admin/update-client/<%=client.id%>/" method="post">
+    <input type="hidden" name="_method" value="patch">
     <label for="name">name</label>
-    <input type="text" name="name">
+    <input type="text" name="name" placeholder="<%=client.name %>">
     <div class="dropdown">
       <select class="stylists" name="stylist_id">
       <% @stylists.each do |stylist| %>
@@ -29,15 +35,30 @@
       <% end %>
       </select>
     </div>
-    <button type="submit">submit</button>
+    <button type="submit">update</button>
+    <% end %>
   </form>
 </div>
+<br>
 
 <h3>Stylists:</h3>
 <form class="form stylist" action="/admin/new-stylist/" method="post">
   <label for="name">name</label>
   <input type="text" name="name">
-  <button type="submit">submit</button>
+  <button type="submit">add stylist</button>
+</form>
+<br>
+<strong>Update Stylist</strong>
+<br>
+<br>
+<% @stylists.each do |stylist| %>
+<strong><%=stylist.name %></strong>
+<form class="form client" action="/admin/update-stylist/<%=stylist.id%>/" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="name">name</label>
+  <input type="text" name="name" placeholder="<%=stylist.name %>">
+  <button type="submit">update</button> <br>
+  <% end %>
 </form>
 
 <hr>
@@ -52,7 +73,7 @@
   <% end %>
 
   <% if @clients.any? %>
-  Clients:
+  Clients: <br>
     <% @clients.each do |client| %>
     <%= client.name %>
     <form class="btn delete" action="/admin/delete-client/<%=client.id%>/" method="post">
@@ -61,3 +82,5 @@
     </form><br>
     <% end %>
   <% end %>
+
+<a href="/">Back</a>

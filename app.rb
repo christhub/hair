@@ -45,3 +45,24 @@ delete("/admin/delete-client/:id/") do
   @client = Client.all
   redirect('/admin/')
 end
+
+patch('/admin/update-client/:id/') do
+  @client = Client.find(params.fetch("id").to_i)
+  name = params.fetch("name")
+  if name == ""
+    name = @client.name
+  end
+  stylist_id = params.fetch("stylist_id")
+  @client.update({name: name, stylist_id: stylist_id})
+  redirect('/admin/')
+end
+
+patch('/admin/update-stylist/:id/') do
+  @stylist = Stylist.find(params.fetch("id").to_i)
+  name = params.fetch("name")
+  if name == ""
+    name = @stylist.name
+  end
+  @stylist.update({name: name})
+  redirect('/admin/')
+end
