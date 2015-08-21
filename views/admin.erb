@@ -1,0 +1,63 @@
+<h2>Update database</h2>
+<h3>Clients:</h3>
+<div class="client">
+  New Client:
+  <% if @stylists.any? %>
+  <form class="form client" action="/admin/new-client/" method="post">
+    <label for="name">name</label>
+    <input type="text" name="name">
+    <div class="dropdown">
+      <select class="stylists" name="stylist_id">
+      <% @stylists.each do |stylist| %>
+          <option value="<%= stylist.id %>"><%=stylist.name%></option>
+      <% end %>
+      </select>
+    </div>
+    <button type="submit">submit</button>
+  </form>
+  <% else %>
+    <h4><em>No Stylists, enter a stylist before you can enter a client!</em></h4>
+  <% end %>
+  Update Client
+  <form class="form client" action="/admin/update-client/" method="post">
+    <label for="name">name</label>
+    <input type="text" name="name">
+    <div class="dropdown">
+      <select class="stylists" name="stylist_id">
+      <% @stylists.each do |stylist| %>
+          <option value="<%= stylist.id %>"><%=stylist.name%></option>
+      <% end %>
+      </select>
+    </div>
+    <button type="submit">submit</button>
+  </form>
+</div>
+
+<h3>Stylists:</h3>
+<form class="form stylist" action="/admin/new-stylist/" method="post">
+  <label for="name">name</label>
+  <input type="text" name="name">
+  <button type="submit">submit</button>
+</form>
+
+<hr>
+  <% if @stylists.any? %>
+  Stylists: <br>
+    <% @stylists.each do |stylist| %>
+    <%= stylist.name %><form class="btn delete" action="/admin/delete-stylist/<%=stylist.id%>/" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" name="button">delete</button>
+    </form><br>
+    <% end %>
+  <% end %>
+
+  <% if @clients.any? %>
+  Clients:
+    <% @clients.each do |client| %>
+    <%= client.name %>
+    <form class="btn delete" action="/admin/delete-client/<%=client.id%>/" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" name="button">delete</button>
+    </form><br>
+    <% end %>
+  <% end %>

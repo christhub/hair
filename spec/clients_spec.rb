@@ -1,6 +1,6 @@
 require('spec_helper')
 
-  test_client = Client.new({:name => "Ivan", :id => nil})
+  test_client = Client.new({:name => "Ivan", :stylist_id => 1, :id => nil})
 
 describe(Client) do
   describe("#name") do
@@ -12,6 +12,12 @@ describe(Client) do
   describe("#id") do
     it('will return the id of the stylist') do
       expect(test_client.id).to(eq(nil))
+    end
+  end
+
+  describe("#stylist_id") do
+    it('will return the id of the stylist') do
+      expect(test_client.stylist_id).to(eq(1))
     end
   end
 
@@ -32,7 +38,7 @@ describe(Client) do
 
   describe('#save') do
     it('will save the client to the database') do
-      testy_client = Client.new({:name => "Theodore", :id => nil})
+      testy_client = Client.new({:name => "Theodore", :stylist_id => 1, :id => nil})
       testy_client.save()
       expect(Client.all()).to(eq([testy_client]))
     end
@@ -40,7 +46,7 @@ describe(Client) do
 
   describe('.find') do
     it('will find a client based on an identifier') do
-      testy_client = Client.new({:name => "Theodore", :id => 1})
+      testy_client = Client.new({:name => "Theodore", :stylist_id => 1, :id => 1})
       testy_client.save
       expect(Client.find(testy_client.id())).to(eq(testy_client))
     end
@@ -48,9 +54,9 @@ describe(Client) do
 
   describe('#delete') do
     it('will delete the entry from the database') do
-      testy_client = Client.new({:name => "Theodore", :id => nil})
+      testy_client = Client.new({:name => "Theodore", :stylist_id => 1, :id => nil})
       testy_client.save
-      testier_client = Client.new({:name => "Brad", :id => nil})
+      testier_client = Client.new({:name => "Brad", :stylist_id => 1, :id => nil})
       testier_client.save
       testy_client.delete
       expect(Client.all).to(eq([testier_client]))
@@ -59,7 +65,7 @@ describe(Client) do
 
   describe('#update') do
     it('will update an entry in the database') do
-      test_client = Client.new({:name => "Ivan", :id => nil})
+      test_client = Client.new({:name => "Ivan", :stylist_id => 1, :id => nil})
       test_client.save
       test_client.update(:name => "Brenda")
       expect(test_client.name).to(eq("Brenda"))
