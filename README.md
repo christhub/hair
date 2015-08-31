@@ -1,12 +1,12 @@
 # _Hair Salon_
 
-##### _{Database for a hair salon with stylists and clients}, {August 21, 2015}_
+##### _Database for a hair salon with stylists and clients, August 21, 2015_
 
 #### By _**Christian Lei**_
 
 ## Description
 
-_{In this database, you're going to be able to store stylists and clients. With the interface you're able to change the client's and stylist's name based on how they feel about it. You will also be able to assign clients to stylists and then change that if you need to.}_
+_In this database, you're going to be able to store stylists and clients. With the interface you're able to change the client's and stylist's name based on how they feel about it. You will also be able to assign clients to stylists and then change that if you need to._
 
 ## Setup
 
